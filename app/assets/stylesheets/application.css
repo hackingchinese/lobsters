@@ -691,17 +691,16 @@ div#story_box button#story_fetch_title {
 }
 div#story_box input#story_title,
 div#story_box input#story_moderation_reason {
-	width: 600px;
+	width: 100%;
 }
 div#story_box #story_tags_a {
-	width: 624px;
+	width: 100%;
 }
 div#story_box textarea {
-	width: 600px;
+	width: 100%;
 }
 div#story_box div.markdown_help_toggler {
-	margin-left: 7em;
-	width: 610px;
+	margin-left: 20px;
 }
 
 div.comment_form_container {
@@ -821,7 +820,7 @@ table.data td p:last-child {
 /* boxes */
 .box {
 	border: 0;
-	margin: 0 40px;
+	margin: 0;
 	padding: 0;
 }
 .box_submitter {
