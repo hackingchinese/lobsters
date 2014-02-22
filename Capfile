@@ -13,4 +13,5 @@ require 'capistrano/version'
 
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
 
+set :log_level, Logger::INFO
 
