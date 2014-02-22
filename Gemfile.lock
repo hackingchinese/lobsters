@@ -25,13 +25,33 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    arel (4.0.1)
+    arel (4.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
+    capistrano (3.0.1)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 0.0.23)
+    capistrano-bundler (1.1.1)
+      capistrano (~> 3.0)
+      sshkit (>= 1.2.0)
+    capistrano-rails (1.1.0)
+      capistrano (>= 3.0.0)
+      capistrano-bundler (>= 1.0.0)
+    capistrano-rails-console (0.1.1)
+      capistrano (>= 3.0.0)
+    capistrano-rvm (0.0.3)
+      capistrano
+    coderay (1.1.0)
+    daemons (1.1.9)
     diff-lcs (1.2.5)
+    dotenv (0.9.0)
+    dotenv-rails (0.9.0)
+      dotenv (= 0.9.0)
     dynamic_form (1.1.4)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     exception_notification (2.6.1)
       actionmailer (>= 3.0.4)
     execjs (2.0.2)
@@ -48,16 +68,24 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.2)
     middleware (0.1.0)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     mysql2 (0.3.14)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
     polyglot (0.3.3)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -77,7 +105,7 @@ GEM
     raindrops (0.12.0)
     rake (10.1.1)
     rdiscount (2.1.7)
-    riddle (1.5.9)
+    riddle (1.5.10)
     rspec-core (2.14.7)
     rspec-expectations (2.14.4)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -89,6 +117,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -99,6 +128,16 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
+    sshkit (1.3.0)
+      net-scp (>= 1.1.2)
+      net-ssh
+      term-ansicolor
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
+    thin (1.6.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
     thinking-sphinx (3.0.6)
       activerecord (>= 3.1.0)
       builder (>= 2.1.2)
@@ -109,6 +148,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    tins (0.13.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -126,6 +166,12 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
+  capistrano (~> 3.0.1)
+  capistrano-bundler
+  capistrano-rails (~> 1.1.0)
+  capistrano-rails-console
+  capistrano-rvm (~> 0.0.3)
+  dotenv-rails
   dynamic_form
   exception_notification (= 2.6.1)
   htmlentities
@@ -135,10 +181,12 @@ DEPENDENCIES
   mysql2 (>= 0.3.14)
   nokogiri
   oauth
+  pry
   rails (= 4.0.2)
   rdiscount
   rspec-rails (~> 2.6)
   sqlite3
+  thin
   thinking-sphinx (~> 3.0.6)
   uglifier (>= 1.3.0)
   unicorn

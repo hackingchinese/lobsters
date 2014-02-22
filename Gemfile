@@ -28,6 +28,19 @@ gem "bcrypt-ruby", "~> 3.1.2"
 # Use unicorn as the app server
 gem "unicorn"
 
+#### added by me
+gem "thin", group: :development
+gem 'dotenv-rails'
+gem 'pry'
+group :capistrano do
+  gem 'capistrano', '~> 3.0.1'
+  gem 'capistrano-rvm', '~> 0.0.3'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails', '~> 1.1.0'
+  gem 'capistrano-rails-console'
+end
+################
+
 gem "nokogiri"
 gem "htmlentities"
 gem "rdiscount"
@@ -43,3 +56,4 @@ group :test, :development do
   gem "machinist"
   gem "sqlite3"
 end
+
