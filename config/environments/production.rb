@@ -78,3 +78,15 @@ Lobsters::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
+
+class << Rails.application
+  def domain
+    "links.hackingchinese.com"
+  end
+
+  def name
+    "Hacking Chinese Links"
+  end
+end
+
+Rails.application.routes.default_url_options[:host] = Rails.application.domain
