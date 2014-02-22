@@ -33,6 +33,7 @@ gem "thin", group: :development
 gem 'dotenv-rails'
 gem 'pry'
 gem 'sass-rails'
+gem 'whenever'
 group :capistrano do
   gem 'capistrano', '~> 3.0.1'
   gem 'capistrano-rvm', github: 'capistrano/rvm'
@@ -48,7 +49,7 @@ gem "rdiscount"
 
 gem "oauth"
 
-gem "thinking-sphinx", "~> 3.0.6"
+gem "thinking-sphinx", "~> 3.1.0"
 
 gem "mail"
 

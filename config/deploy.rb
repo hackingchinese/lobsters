@@ -10,7 +10,7 @@ set :scm, :git
 
 set :format, :pretty
 set :pty, true
-# set :log_level, :info
+set :log_level, :info
 
 set :linked_files, %w{config/database.yml .env config/email.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads db/sphinx}
@@ -32,6 +32,19 @@ end
 desc 'ping server for passenger restart'
 task :ping_restart do
   run_locally do
-    execute 'curl --silent http://www.podfilter.de'
+    execute 'curl --silent http://links.hackingchinese.com'
   end
 end
+
+
+
+
+desc "Update crontab with whenever"
+task :update_crontab do
+  on roles(:all) do
+    within release_path do
+      execute :bundle, :exec, "whenever --update-crontab #{fetch(:application)}"
+    end
+  end
+end
+after 'deploy:published', 'update_crontab'
