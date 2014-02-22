@@ -7,6 +7,8 @@ u.is_admin = true
 u.is_moderator = true
 u.save!
 
+User.update_all :created_at => 10.days.ago # fake new users
+
 %w[ Beginner Intermediate Advanced Listening Speaking Reading Writing Book Video Audio Software/app Website Culture Strategy ].each do |tag|
   t = Tag.new
   t.tag = tag

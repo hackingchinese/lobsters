@@ -29,8 +29,17 @@
   <% end %>
 </head>
 <body>
+
+  <div id="site" class="one-sidebar-right">
+    <div id="page">
+      <div id="page-canvas">
+        <div class="container-group fix" id="header">
+          <%= render 'layouts/hackingchinese' %>
+        </div>
+      </div>
+
   <div id="wrapper">
-    <div id="header">
+    <div id="local-header">
       <div id="headerleft">
         <a id="l_holder" style="background-color: #<%= sprintf("%02x%02x%02x",
         [ 255, (@traffic * 7).floor + 50.0 ].min, 0, 0) %>;" href="/"
@@ -103,7 +112,7 @@
 
       <%= yield %>
 
-      <div id="footer">
+      <div id="local-footer">
         <a href="/moderations">Moderation Log</a>
         <% if @user && !@user.is_new? &&
         (iqc = InvitationRequest.verified_count) > 0 %>
@@ -114,6 +123,8 @@
       </div>
       <div class="clear"></div>
     </div>
+  </div>
+  </div>
   </div>
 </body>
 </html>

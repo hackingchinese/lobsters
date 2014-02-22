@@ -32,9 +32,10 @@ gem "unicorn"
 gem "thin", group: :development
 gem 'dotenv-rails'
 gem 'pry'
+gem 'sass-rails'
 group :capistrano do
   gem 'capistrano', '~> 3.0.1'
-  gem 'capistrano-rvm', '~> 0.0.3'
+  gem 'capistrano-rvm', github: 'capistrano/rvm'
   gem 'capistrano-bundler'
   gem 'capistrano-rails', '~> 1.1.0'
   gem 'capistrano-rails-console'
