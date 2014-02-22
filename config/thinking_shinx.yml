@@ -1,7 +1,13 @@
 production:
   address: 127.0.0.1
+  mysql41: 9313
   port: 9313
   min_infix_len: 2
+  pid_file: "tmp/pids/searchd.pid"
 
 development:
   min_infix_len: 2
+  address: 127.0.0.1
+  mysql41: 9312
+  port: 9312
+  pid_file: "tmp/pids/searchd.pid"

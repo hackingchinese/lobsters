@@ -59,3 +59,15 @@ end
 Rails.application.routes.default_url_options[:host] = Rails.application.domain
 
 require "#{Rails.root}/lib/monkey"
+
+class << Rails.application
+  def domain
+    "links.hackingchinese.com"
+  end
+
+  def name
+    "Hacking Chinese Links"
+  end
+end
+
+Rails.application.routes.default_url_options[:host] = Rails.application.domain
