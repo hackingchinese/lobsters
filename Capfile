@@ -10,8 +10,7 @@ require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano/rails/console'
 require 'capistrano/version'
+require 'thinking_sphinx/capistrano'
 
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
-
-set :log_level, Logger::INFO
 
