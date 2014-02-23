@@ -464,7 +464,7 @@ DO NOT CUSTOMIZE THIS FILE USE BASE CHILD THEME OR SETTINGS
 			}
 
 			/*IE6 border color (transparent border fix)*/
-			*html .main_nav li a{ border-color: white; }
+			/* *html .main_nav li a{ border-color: white; } */
 
 			/* Drop Down */
 			.main_nav ul ul {display: none;}
