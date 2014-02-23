@@ -85,7 +85,7 @@ class HomeController < ApplicationController
     # @tag = Tag.where(:tag => params[:tag]).first!
     @tags = []
 
-    @tags << Tag.tier(0).where(tag: params[:tier_0]).first!
+    @tags << Tag.where(tag: params[:tier_0]).first!
     if params[:tier_1]
       @tags << Tag.tier(1).where(tag: params[:tier_1]).first!
     end
@@ -180,7 +180,7 @@ private
     end
 
     if how[:tags]
-      stories = stories.where(stories: { id: Tagging.where(tag_id: how[:tags]).select(:story_id) })
+      stories = stories.where(stories: { id: Tagging.where(tag_id: how[:tags]).having("count(tag_id) = ?", how[:tags].count).group(:story_id).select(:story_id) })
     elsif how[:by_user]
       stories = stories.where(:user_id => how[:by_user].id)
     elsif filtered_tag_ids.any?
