@@ -31,7 +31,7 @@ class Tag < ActiveRecord::Base
     Tag.active.order(:tag).accessible_to(user).map{|t|
       t.stories_count = counts[t.id].to_i
       t
-    } 
+    }
   end
 
   def css_class
@@ -44,6 +44,10 @@ class Tag < ActiveRecord::Base
     else
       true
     end
+  end
+
+  def story_count_in(other_tag)
+    Tagging.where(tag_id: [self.id,other_tag.id]).group(:story_id).having('count(story_id) = 2').count.count
   end
 
   def filtered_count

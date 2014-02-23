@@ -1,7 +1,6 @@
 Lobsters::Application.routes.draw do
   scope :format => "html" do
-    root :to => "home#index",
-      :protocol => (Rails.env == "production" ? "https://" : "http://")
+    root :to => "home#index"
 
     get "/rss" => "home#index", :format => "rss"
     get "/hottest" => "home#index", :format => "json"
@@ -33,6 +32,8 @@ Lobsters::Application.routes.draw do
     match "/login/set_new_password" => "login#set_new_password",
       :as => "set_new_password", :via => [:get, :post]
 
+    get "/t/:category/:tag" => "home#tagged", :as => "category", :format => /html|rss/
+    get "/t/:category/:tag/page/:page" => "home#tagged"
     get "/t/:tag" => "home#tagged", :as => "tag", :format => /html|rss/
     get "/t/:tag/page/:page" => "home#tagged"
 

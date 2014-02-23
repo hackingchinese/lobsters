@@ -1,7 +1,9 @@
 /*
+ *= require hc/common
  *= require select2
  *= require_self
- *= require mobile
+ *= require hc/style
+ *= require hc/dynamic
  *= require hackingchinese
 */
 

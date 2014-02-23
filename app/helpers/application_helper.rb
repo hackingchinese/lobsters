@@ -16,4 +16,12 @@ module ApplicationHelper
     label_tag(nil, time_ago_in_words(*args),
       :title => args.first.strftime("%F %T %z"))
   end
+
+  def tag_url_with_category(tag)
+    if @tag and @tag.important?
+      tag_url tag: [@tag, tag]
+    else
+      tag_url(tag)
+    end
+  end
 end

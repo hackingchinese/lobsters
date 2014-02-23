@@ -1,0 +1,14 @@
+<div>
+  <% Tag.where(important: true).each do |tg| %>
+    <%= link_to tg.tag, tag_url(tg), class: "tag #{tg == @tag ? 'active' : ''}" %>
+  <% end %>
+</div>
+<% if @tag and @tag.important? %>
+  <div>
+    <% Tag.where(important: [false, nil]).order(:tag).each do |tg| %>
+      <% if (count = tg.story_count_in(@tag)) and count > 0 %>
+      <%= link_to tag_url_with_category(tg), class: "tag #{tg == @tag ? 'active' : ''}"  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

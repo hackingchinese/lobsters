@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
-  STORIES_PER_PAGE = 25
+  STORIES_PER_PAGE = 50
 
   # how many points a story has to have to probably get on the front page
   HOT_STORY_POINTS = 5
 
   # how many days old a story can be to get on the bottom half of /recent
-  RECENT_DAYS_OLD = 3
+  RECENT_DAYS_OLD = 7
 
   # for rss feeds, load the user's tag filters if a token is passed
   before_filter :find_user_from_rss_token, :only => [ :index, :newest ]
@@ -83,8 +83,14 @@ class HomeController < ApplicationController
 
   def tagged
     @tag = Tag.where(:tag => params[:tag]).first!
+    if params[:category]
+      @sub_tag = @tag
+      @tag = Tag.where(tag: params[:category]).first!
+      @stories = find_stories({ :tags => [@tag, @subtag] })
+    else
+      @stories = find_stories({ :tags => [ @tag] })
+    end
 
-    @stories = find_stories({ :tag => @tag })
 
     @heading = @title = @tag.description.blank?? @tag.tag : @tag.description
     @cur_url = tag_url(@tag.tag)
@@ -169,16 +175,8 @@ private
       filtered_tag_ids = tags_filtered_by_cookie.map{|t| t.id }
     end
 
-    if how[:tag]
-      stories = stories.where(
-        Story.arel_table[:id].in(
-          Tagging.arel_table.where(
-            Tagging.arel_table[:tag_id].eq(how[:tag].id)
-          ).project(
-            Tagging.arel_table[:story_id]
-          )
-        )
-      )
+    if how[:tags]
+      stories = stories.where(stories: { id: Tagging.where(tag_id: how[:tags]).select(:story_id) })
     elsif how[:by_user]
       stories = stories.where(:user_id => how[:by_user].id)
     elsif filtered_tag_ids.any?

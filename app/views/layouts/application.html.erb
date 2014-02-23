@@ -18,9 +18,6 @@
   <title><%= @title.present? ? "#{@title} | " : "" %><%=
     Rails.application.name %></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= stylesheet_link_tag '//www.hackingchinese.com/wp-content/themes/platform/css/common.css', media: :all %>
-  <%= stylesheet_link_tag '//www.hackingchinese.com/wp-content/themes/platform/style.css?ver=142-011814131227', media: :all %>
-  <%= stylesheet_link_tag '//www.hackingchinese.com/wp-content/themes/platform/css/dynamic.css?ver=142-011814125916', media: :all %>
   <% if @user %>
     <%= javascript_include_tag "application" %>
     <script>
