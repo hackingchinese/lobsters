@@ -1,6 +1,6 @@
 <table id=tagtable>
 <tr>
-  <td width=120>What is your current level?</td>
+  <td width=180>What is your current level?</td>
   <td>
     <% Tag.tier(0).each do |tg| %>
       <%= link_to tg.tag, tag_url(tg), class: "#{tg.css_class} #{tg == @tags.try(:[],0) ? 'active' : ''}" %>
