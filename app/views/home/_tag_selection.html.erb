@@ -11,7 +11,7 @@
   <tr>
     <td> What do you want to improve? </td>
     <td>
-      <% Tag.tier(1).order(:id).each do |tg| %>
+      <% Tag.tier(1).sort_by{|i| %w[listening speaking reading writing vocabulary grammar culture strategy].index(i.tag.downcase)}.each do |tg| %>
         <% if (count = tg.story_count_in(@tags.take(1))) and count > 0 %>
           <%= link_to tag_url_with_category(tg), class: "tag #{tg == @tags[1] ? 'active' : ''}"  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
         <% end %>
