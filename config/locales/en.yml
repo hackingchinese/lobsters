@@ -3,3 +3,29 @@
 
 en:
   hello: "Hello world"
+  tiers:
+    "0": Proficiency
+    "1": Skill
+    "2": Medium/Extra
+
+  text:
+    guidelines: |
+      #### Question #1: What is your proficiency level?
+
+      This question is the most fundamental one. If you search for listening material, you don't want to find ten interesting programs that are all too difficult. If you are an advanced learner, you don't want to find five grammar resources that deal with very basic concepts you're already familiar with. Therefore, finding suitable material starts with the question of what proficiency level you're currently at.
+
+      The answer is given using three tags: beginner, intermediate and advanced. The definitions of these levels are the same as those on Hacking Chinese in general, please refer to the different categories for a more detailed discussion. Note that resources can have more than one tag detailing proficiency. A resource can be useful for both intermediate and advanced students, for instance, or an article in English about cultural pitfalls can target all learners. However, material in Chinese is more unlikely to target more than one proficiency level.
+
+      #### Question #2: What skill do you want to improve?
+
+      Once we know what material the reader is capable of dealing with, we need to know what area she wants to improve. In other words, why is she looking for a particular resource? This question is of secondary importance and it might be enough for many visitors to simply select proficiency level, especially if they're returning visitors. Someone coming to the site to look for something in particular are more likely to need to answer this question.
+
+      The answer is given using the four primary skills of listening, speaking, reading and writing. Since this is fairly crude, I have decided to add vocabulary, grammar, culture and strategy to the list. The should all be quite self-explanatory, except perhaps the last one. The strategy tag is meant to designate the how-to skill, so almost everything I've written on Hacking Chinese so far would sort under this tag.
+
+      There can be overlap when answering this question as well. For instance, a site that offers both reading and listening exercises should be tagged with both tags. An article in English about how to improve listening ability should be tagged with strategy and listening. However, use as few tags as possible. Just because there are subtitles in a video doesn't make it reading practice. Tag according to the main focus of the resource.
+
+      #### Additional tags
+
+      **The above two questions have to be answered properly for every link that it posted to the site**. However, in some cases this might not be enough. For instance, it might be interesting to know what kind of medium is being shared (blog/video/audio/app) or if you need any specific tools to use it (such as a specific OS). Feel free to use any tags you feel necessary to give further information about the resource you share. Remember, the goal isn't only to make it clear what the link is about to those who see it, it's also to allow people who search through the links to find what they're looking for.
+
+

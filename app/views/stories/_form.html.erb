@@ -48,19 +48,14 @@
   <%= f.label :tags_a, "Tags:", :class => "required",
     :style => "line-height: 2.3em;" %>
   <%= f.select "tags_a", options_for_select(
-    Tag.all_with_filtered_counts_for(@user).map{|t|
-    [ "#{t.tag} - #{t.description}", t.tag, { "data-html" => raw("<strong>") +
-      t.tag + raw("</strong> - ") + t.description.to_s +
-      (t.filtered_count == 0 ? "" :
-      raw(" <em>") + "#{t.filtered_count} user" +
-      (t.filtered_count == 1 ? "" : "s") + " filtering" +
-      raw("</em>")) } ]}, f.object.tags_a), {}, { :multiple => true } %>
+    Tag.order('tier').map{|t|
+      t.tag + " <em>#{I18n.t("tiers.#{t.tier}")}</em>"}, f.object.tags_a
+    ), {}, { :multiple => true } %>
   </div>
 
   <div class="boxline">
     <%= f.label :description, "Text:", :class => "required" %>
     <%= f.text_area :description, :rows => 15,
-      :placeholder => "Optional when submitting a URL; please see guidelines",
       :autocomplete => "off" %>
   </div>
 
@@ -70,49 +65,8 @@
     </a>
     <div id="story_guidelines" style="<%= @user &&
       @user.stories_submitted_count > 5 ? "display: none;" : "" %>">
-      <!--
-        <div style="float: right;">
-        <a href="javascript:window.location=%22<%= root_url %>stories/new?url=%22+encodeURIComponent(document.location)+%22&title=%22+encodeURIComponent(document.title)"
-        style="border: 1px solid #ddd; padding: 0.5em; background-color:
-        #f8f8f8; line-height: 1.5em; margin-left: 1em;">Submit to
-        <%= Rails.application.name %></a>
-        </div>
-        <ul>
 
-        <li><p>
-        To be able to easily submit a page you're viewing in your browser
-        to <%= Rails.application.name %>, drag the bookmarklet to the right
-        to your bookmark bar.  You'll be taken to this page with the viewed
-        page's URL and title.
-        </p></li>
-        -->
-
-        <li><p>
-        When submitting a URL, the text field is optional and should only
-        be used when additional context or explanation of the URL is
-        needed.  Commentary or opinion should be reserved for a comment,
-        so that it can be voted on separately from the story.
-        </p></li>
-
-        <li><p>
-        Do not editorialize story titles, but when the original story's
-        title has no context or is unclear, please change it.  <strong>Please
-        remove extraneous components from titles such as the name of the
-        site or section.</strong>
-        </p></li>
-
-        <li><p>
-        If no tags clearly apply to the story you are submitting, chances
-        are it does not belong here.  Do not overreach with tags if they
-        are not the primary focus of the story.
-        </p></li>
-
-        <li><p>
-        When the story being submitted is more than a year or so old,
-        please add the year the story was written to the post title in
-        parentheses.
-        </p></li>
-
+      <%= markdown t 'text.guidelines' %>
       </ul>
     </div>
   </div>

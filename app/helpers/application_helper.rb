@@ -25,4 +25,10 @@ module ApplicationHelper
       tag_url(tag)
     end
   end
+
+  def markdown(text)
+    require 'rdiscount'
+    markdown = RDiscount.new(text)
+    markdown.to_html.html_safe
+  end
 end
