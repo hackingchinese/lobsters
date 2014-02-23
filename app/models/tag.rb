@@ -36,7 +36,7 @@ class Tag < ActiveRecord::Base
   end
 
   def css_class
-    "tag tag_#{self.tag}" << (self.is_media?? " tag_is_media" : "")
+    "tag tag_#{self.tag} tag-tier-#{self.tier}" << (self.is_media?? " tag_is_media" : "")
   end
 
   def valid_for?(user)
