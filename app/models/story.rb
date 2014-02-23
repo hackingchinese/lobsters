@@ -145,6 +145,10 @@ class Story < ActiveRecord::Base
   # this has to happen just before save rather than in tags_a= because we need
   # to have a valid user_id
   def check_tags
+    tags = self.taggings.map{|i|i.tag}
+    if tags.select{|i| i.tier == 0}.count == 0 || tags.select{|i| i.tier == 1}.count == 0
+      errors.add :tags, 'Please select at least one tag from the proficiency and one from the skill list'
+    end
   end
 
   def comments_url

@@ -49,7 +49,7 @@
     :style => "line-height: 2.3em;" %>
   <%= f.select "tags_a", options_for_select(
     Tag.order('tier').map{|t|
-      t.tag + " <em>#{I18n.t("tiers.#{t.tier}")}</em>"}, f.object.tags_a
+      [t.tag + " <em>#{I18n.t("tiers.#{t.tier}")}</em>", t.tag]}, f.object.tags_a
     ), {}, { :multiple => true } %>
   </div>
 
