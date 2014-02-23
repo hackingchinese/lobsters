@@ -11,6 +11,7 @@ class Tag < ActiveRecord::Base
   end
 
   scope :active, -> { where(:inactive => false) }
+  scope :tier, ->(i) { where(tier: i)}
 
   def to_param
     self.tag
@@ -46,8 +47,8 @@ class Tag < ActiveRecord::Base
     end
   end
 
-  def story_count_in(other_tag)
-    Tagging.where(tag_id: [self.id,other_tag.id]).group(:story_id).having('count(story_id) = 2').count.count
+  def story_count_in(other_tags)
+    Tagging.where(tag_id: other_tags + [self]).group(:story_id).having('count(story_id) = ?', other_tags.count + 1).count.count
   end
 
   def filtered_count

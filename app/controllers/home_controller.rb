@@ -82,15 +82,19 @@ class HomeController < ApplicationController
   end
 
   def tagged
-    @tag = Tag.where(:tag => params[:tag]).first!
-    if params[:category]
-      @sub_tag = @tag
-      @tag = Tag.where(tag: params[:category]).first!
-      @stories = find_stories({ :tags => [@tag, @subtag] })
-    else
-      @stories = find_stories({ :tags => [ @tag] })
-    end
+    # @tag = Tag.where(:tag => params[:tag]).first!
+    @tags = []
 
+    @tags << Tag.tier(0).where(tag: params[:tier_0]).first!
+    if params[:tier_1]
+      @tags << Tag.tier(1).where(tag: params[:tier_1]).first!
+    end
+    if params[:tier_2]
+      @tags << Tag.tier(2).where(tag: params[:tier_2]).first!
+    end
+    @tag = @tags.last
+
+    @stories = find_stories(tags: @tags)
 
     @heading = @title = @tag.description.blank?? @tag.tag : @tag.description
     @cur_url = tag_url(@tag.tag)

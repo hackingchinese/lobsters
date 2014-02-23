@@ -18,8 +18,9 @@ module ApplicationHelper
   end
 
   def tag_url_with_category(tag)
-    if @tag and @tag.important?
-      tag_url tag: [@tag, tag]
+    if @tags
+      tgs = @tags[0...tag.tier] + [tag]
+      tag_url tier_0: tgs
     else
       tag_url(tag)
     end

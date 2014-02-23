@@ -32,10 +32,14 @@ Lobsters::Application.routes.draw do
     match "/login/set_new_password" => "login#set_new_password",
       :as => "set_new_password", :via => [:get, :post]
 
-    get "/t/:category/:tag" => "home#tagged", :as => "category", :format => /html|rss/
-    get "/t/:category/:tag/page/:page" => "home#tagged"
-    get "/t/:tag" => "home#tagged", :as => "tag", :format => /html|rss/
-    get "/t/:tag/page/:page" => "home#tagged"
+    get "/t/:tier_0/:tier_1/:tier_2" => "home#tagged", :format => /html|rss/
+    get "/t/:tier_0/:tier_1/:tier_2/page/:page" => "home#tagged"
+
+    get "/t/:tier_0/:tier_1/" => "home#tagged", :format => /html|rss/
+    get "/t/:tier_0/:tier_1/page/:page" => "home#tagged"
+
+    get "/t/:tier_0" => "home#tagged", :format => /html|rss/, as: :tag
+    get "/t/:tier_0/page/:page" => "home#tagged"
 
     get "/search" => "search#index"
 
