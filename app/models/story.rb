@@ -155,6 +155,10 @@ class Story < ActiveRecord::Base
     "#{short_id_url}/#{self.title_as_url}"
   end
 
+  def comments_path
+    "#{short_id_path}/#{self.title_as_url}"
+  end
+
   def description=(desc)
     self[:description] = desc.to_s.rstrip
     self.markeddown_description = self.generated_markeddown_description
@@ -294,6 +298,9 @@ class Story < ActiveRecord::Base
 
   def short_id_url
     Rails.application.routes.url_helpers.root_url.gsub('https:','http:') + "s/#{self.short_id}"
+  end
+  def short_id_path
+    Rails.application.routes.url_helpers.root_path + "s/#{self.short_id}"
   end
 
   def score

@@ -18,7 +18,7 @@
       <% if @cur_url.present? && !links.keys.include?(@cur_url) &&
       @heading.present? %>
         <span id="headertitle">
-          <a href="<%= @cur_url %>"><%= @heading %></a>
+          <a data-push href="<%= @cur_url %>"><%= @heading %></a>
         </span>
       <% end %>
 
@@ -32,19 +32,19 @@
 
     <div id="headerright" class="<%= @user ? "loggedin" : "" %>">
       <span class="headerlinks">
-      <a href="/filters" <%= @cur_url == "/filters" ?
+      <a data-push href="/filters" <%= @cur_url == "/filters" ?
         raw("class=\"cur_url\"") : "" %>>Filters</a>
       <% if @user %>
         <% if (count = @user.unread_message_count) > 0 %>
-          <a href="/messages" class="new_messages <%= @cur_url == "/messages" ?
+          <a data-push href="/messages" class="new_messages <%= @cur_url == "/messages" ?
             "cur_url" : "" %>"><%= count %> New Message<%= count == 1 ? "" :
             "s" %></a>
         <% else %>
-          <a href="/messages" <%= @cur_url == "/messages" ?
+          <a data-push href="/messages" <%= @cur_url == "/messages" ?
             raw("class=\"cur_url\"") : "" %>>Messages</a>
         <% end %>
 
-        <a href="/settings" <%= @cur_url == "/settings" ?
+        <a data-push href="/settings" <%= @cur_url == "/settings" ?
           raw("class=\"cur_url\"") : "" %>><%= @user.username %>
           (<%= @user.karma %>)</a>
 
@@ -52,7 +52,7 @@
           :data => { :confirm => "Are you sure you want to logout?" },
           :method => "post" %>
       <% else %>
-        <a href="/login">Login</a>
+        <a href="/login" data-push>Login</a>
       <% end %>
       </span>
     </div>
@@ -70,10 +70,10 @@
     <%= yield %>
 
     <div id="local-footer">
-      <a href="/moderations">Moderation Log</a>
+      <a href="/moderations" data-push>Moderation Log</a>
       <% if @user && !@user.is_new? &&
       (iqc = InvitationRequest.verified_count) > 0 %>
-        <a href="/invitations">Invitation Queue (<%= iqc %>)</a>
+        <a href="/invitations" data-push>Invitation Queue (<%= iqc %>)</a>
       <% end %>
       <a href="/privacy">Privacy</a>
       <a href="/about">About</a>

@@ -226,32 +226,8 @@ var _Lobsters = Class.extend({
 
 var Lobsters = new _Lobsters();
 
-window.page_events = function() {
-  $(".comment a.downvoter").click(function() {
-    Lobsters.downvoteComment(this);
-    return false;
-  });
-  $(".comment a.upvoter").click(function() {
-    Lobsters.upvoteComment(this);
-    return false;
-  });
-
-  $("li.story a.downvoter").click(function() {
-    Lobsters.downvote(this);
-    return false;
-  });
-  $("li.story a.upvoter").click(function() {
-    Lobsters.upvote(this);
-    return false;
-  });
-
-  $("li.story a.mod_story_link").click(function() {
-    return Lobsters.moderateStory(this);
-  })
-}
 
 $(document).ready(function() {
-  page_events()
 
   $(document).on("click", "a.comment_replier", function() {
     if (!Lobsters.curUser) {
@@ -300,15 +276,6 @@ $(document).ready(function() {
       function(d) {
         $(li).replaceWith(d);
       });
-    }
-  });
-
-  $("#story_tags_a").select2({
-    formatSelection: function(what) {
-      return what.id;
-    },
-    matcher: function(term, text) {
-      return text.toUpperCase().indexOf(term.toUpperCase()) == 0;
     }
   });
 
