@@ -30,6 +30,7 @@ class="story <%= story.vote == 1 ? "upvoted" : (story.vote == -1 ?
         <% story.taggings.sort_by{|t| t.tag.tag }.sort_by{|t|
         t.tag.tag == "pdf" ? -1 : 0 }.each do |tagging| %>
           <a href="<%= tag_url_with_category(tagging.tag) %>"
+            data-push
             class="<%= tagging.tag.css_class %>"
             title="<%= tagging.tag.description %>"><%= tagging.tag.tag %></a>
         <% end %>

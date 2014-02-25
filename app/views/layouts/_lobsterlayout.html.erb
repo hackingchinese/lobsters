@@ -24,7 +24,7 @@
 
       <span class="headerlinks">
         <% links.each do |u,v| %>
-          <a href="<%= u %>" <%= u == @cur_url ? raw("class=\"cur_url\"") :
+          <a data-push href="<%= u %>" <%= u == @cur_url ? raw("class=\"cur_url\"") :
             "" %>><%= v %></a>
         <% end %>
       </span>

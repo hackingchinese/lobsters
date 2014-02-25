@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require wiselinks
 //= require_tree .
 
 "use strict";
@@ -225,7 +226,7 @@ var _Lobsters = Class.extend({
 
 var Lobsters = new _Lobsters();
 
-$(document).ready(function() {
+window.page_events = function() {
   $(".comment a.downvoter").click(function() {
     Lobsters.downvoteComment(this);
     return false;
@@ -246,7 +247,11 @@ $(document).ready(function() {
 
   $("li.story a.mod_story_link").click(function() {
     return Lobsters.moderateStory(this);
-  }),
+  })
+}
+
+$(document).ready(function() {
+  page_events()
 
   $(document).on("click", "a.comment_replier", function() {
     if (!Lobsters.curUser) {

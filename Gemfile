@@ -17,6 +17,10 @@ gem "uglifier", ">= 1.3.0"
 
 # Use jquery as the JavaScript library
 gem "jquery-rails"
+
+gem 'wiselinks'
+gem 'coffee-rails'
+
 gem "dynamic_form"
 
 # use old version that doesn't have tinder bullshit
