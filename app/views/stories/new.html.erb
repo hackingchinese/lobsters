@@ -38,7 +38,7 @@
 </div>
 
 <script>
-  $(document).ready(function() {
+    var doit = function() {
     <% if @story.previewing %>
       $("#story_tags_a").select2({
         formatSelection: function(what) {
@@ -48,5 +48,7 @@
     <% else %>
       $("#story_url").focus();
     <% end %>
-  });
+  };
+  $(document).ready(function() { doit() })
+  $(document).on('page:done', function() { doit() })
 </script>
