@@ -75,6 +75,19 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  def filter_tags
+    tags = if @user
+      @user.tag_filter_tags
+    else
+      tags_filtered_by_cookie
+    end
+    if tags.blank?
+      Tag.all
+    else
+      tags
+    end
+  end
+
   def user_is_spider?
     !!request.env["HTTP_USER_AGENT"].to_s.match(/Googlebot/)
   end

@@ -172,12 +172,7 @@ private
       )
     end
 
-    filtered_tag_ids = []
-    if @user
-      filtered_tag_ids = @user.tag_filters.map{|tf| tf.tag_id }
-    else
-      filtered_tag_ids = tags_filtered_by_cookie.map{|t| t.id }
-    end
+    filtered_tag_ids = filter_tags.pluck :id
 
     if how[:tags]
       stories = stories.where(stories: { id: Tagging.where(tag_id: how[:tags]).having("count(tag_id) = ?", how[:tags].count).group(:story_id).select(:story_id) })
@@ -185,7 +180,7 @@ private
       stories = stories.where(:user_id => how[:by_user].id)
     elsif filtered_tag_ids.any?
       stories = stories.where(
-        Story.arel_table[:id].not_in(
+        Story.arel_table[:id].in(
           Tagging.arel_table.where(
             Tagging.arel_table[:tag_id].in(filtered_tag_ids)
           ).project(

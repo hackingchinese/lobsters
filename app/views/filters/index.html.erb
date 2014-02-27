@@ -1,17 +1,17 @@
 <div class="box wide">
   <div class="legend">
-    Filtered Tags
+    Selected Tags
   </div>
 
   <p>
-  To hide stories from the home page that have been tagged with certain tags,
+  To select stories from the home page that have been tagged with certain tags,
   check them below.
   </p>
 
   <% if !@user %>
     <p>
-    Since you are not logged in, your filters will be stored in a long-lasting
-    browser cookie.  To permanently store your tag filters and have them work
+    Since you are not logged in, your selections will be stored in a long-lasting
+    browser cookie.  To permanently store your tag selections and have them work
     across browsers, <a href="/login">login</a> to your account.
     </p>
   <% end %>
@@ -19,7 +19,7 @@
   <%= form_tag "/filters", :method => :post do %>
     <table class="data zebra" cellspacing=0 width="75%">
     <tr>
-      <th width="7%">Hide</th>
+      <th width="7%">Show</th>
       <th width="13%">Tag</th>
       <th width="65%">Description</th>
       <th width="5%" style="text-align: right; padding-right: 1em;">Stories</th>

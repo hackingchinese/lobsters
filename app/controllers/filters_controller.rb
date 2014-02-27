@@ -3,15 +3,11 @@ class FiltersController < ApplicationController
 
   def index
     @cur_url = "/filters"
-    @title = "Filtered Tags"
+    @title = "Selected Tags"
 
     @tags = Tag.active.all_with_story_counts_for(@user)
+    @filtered_tags = filter_tags
 
-    if @user
-      @filtered_tags = @user.tag_filter_tags.to_a
-    else
-      @filtered_tags = tags_filtered_by_cookie.to_a
-    end
   end
 
   def update
