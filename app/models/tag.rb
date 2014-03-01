@@ -48,7 +48,8 @@ class Tag < ActiveRecord::Base
   end
 
   def story_count_in(other_tags)
-    Tagging.where(tag_id: other_tags + [self]).group(:story_id).having('count(story_id) = ?', other_tags.count + 1).count.count
+    tags = (other_tags + [ self]).uniq.compact
+    Tagging.where(tag_id: tags).group(:story_id).having('count(story_id) = ?', tags.count).count.count
   end
 
   def filtered_count

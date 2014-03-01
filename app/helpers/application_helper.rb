@@ -19,8 +19,14 @@ module ApplicationHelper
 
   def tag_url_with_category(tag)
     if @tags
-      tgs = @tags[0...tag.tier] + [tag]
-      tag_url tier_0: tgs
+      case tag.tier
+      when 0
+        tag_url tier_0: tag
+      when 1
+        tag_url tier_0: [ @tags[0] || 'All' , tag]
+      when 2
+        tag_url tier_0: [ @tags[0] || 'All', @tags[1] || 'All' , tag]
+      end
     else
       tag_url(tag)
     end

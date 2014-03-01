@@ -7,19 +7,18 @@
     <% end %>
   </td>
 </tr>
-<% if @tags %>
   <tr>
     <td><strong> What do you want to improve?</strong> </td>
     <td>
       <% Tag.tier(1).sort_by{|i| %w[listening speaking reading writing vocabulary grammar culture how-to-learn productivity].index(i.tag.downcase) || -1}.each do |tg| %>
-        <% if (count = tg.story_count_in(@tags.take(1))) and count > 0 %>
+        <% if (count = tg.story_count_in(@tags.compact.take(1))) and count > 0 %>
           <%= link_to tag_url_with_category(tg), class: "#{tg.css_class} #{tg == @tags[1] ? 'active' : ''}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
         <% end %>
       <% end %>
     </td>
   </tr>
 
-  <% if @tags.count >  1 %>
+  <% if tag_tier > 0 %>
     <tr>
       <td><strong> Additional</strong> </td>
       <td>
@@ -31,5 +30,4 @@
       </td>
     </tr>
   <% end %>
-<% end %>
 </table>

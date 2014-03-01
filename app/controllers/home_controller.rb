@@ -12,6 +12,7 @@ class HomeController < ApplicationController
 
   def index
     @stories = find_stories
+    @tags = []
 
     @rss_link ||= "<link rel=\"alternate\" type=\"application/rss+xml\" " <<
       "title=\"RSS 2.0\" href=\"/rss" <<
@@ -85,9 +86,17 @@ class HomeController < ApplicationController
     # @tag = Tag.where(:tag => params[:tag]).first!
     @tags = []
 
-    @tags << Tag.where(tag: params[:tier_0]).first!
+    if params[:tier_0] == 'All'
+      @tags << nil
+    else
+      @tags << Tag.where(tag: params[:tier_0]).first!
+    end
     if params[:tier_1]
-      @tags << Tag.tier(1).where(tag: params[:tier_1]).first!
+      if params[:tier_1] == 'All'
+        @tags << nil
+      else
+        @tags << Tag.tier(1).where(tag: params[:tier_1]).first!
+      end
     end
     if params[:tier_2]
       @tags << Tag.tier(2).where(tag: params[:tier_2]).first!
@@ -131,6 +140,10 @@ class HomeController < ApplicationController
   end
 
 private
+  def tag_tier
+    (@tags || []).compact.map(&:tier).max || 0
+  end
+  helper_method :tag_tier
   def find_stories(how = {})
     @page = how[:page] = 1
     if params[:page].to_i > 0
@@ -175,7 +188,7 @@ private
     filtered_tag_ids = filter_tags.pluck :id
 
     if how[:tags]
-      stories = stories.where(stories: { id: Tagging.where(tag_id: how[:tags]).having("count(tag_id) = ?", how[:tags].count).group(:story_id).select(:story_id) })
+      stories = stories.where(stories: { id: Tagging.where(tag_id: how[:tags].compact).having("count(tag_id) = ?", how[:tags].compact.count).group(:story_id).select(:story_id) })
     elsif how[:by_user]
       stories = stories.where(:user_id => how[:by_user].id)
     elsif filtered_tag_ids.any?
