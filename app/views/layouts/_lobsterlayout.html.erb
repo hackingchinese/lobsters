@@ -1,16 +1,16 @@
 <div id="wrapper">
-  <h2>Links</h2>
+  <h2><%= t :site_title %></h2>
   <div id="local-header">
     <div id="headerleft">
       <% links = {
-        "/" => "Links",
+        "/" => t(:site_title),
         "/newest" => "Newest",
         "/comments" => "Comments"
       } %>
 
       <% if @user %>
         <% links.merge!({ "/threads" => "Your Threads",
-          "/stories/new" => "Submit Story" }) %>
+          "/stories/new" => "Submit resource" }) %>
       <% end %>
 
       <% links.merge!({ "/search" => "Search" }) %>

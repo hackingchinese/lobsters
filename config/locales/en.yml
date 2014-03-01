@@ -2,13 +2,17 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  site_title: Resources
   tiers:
     "0": Proficiency
     "1": Skill
     "2": Medium/Extra
 
   text:
+    invite_guidelines: |
+      Invitations are unlimited, but persons you invite will be associated with your
+      account. Please be responsible and use your discretion when inviting persons you don't personally know.
+
     guidelines: |
       The main purpose of this section of Hacking Chinese is to provide links to interesting resources for Chinese learners. Note that even though it works well for sharing the latest news, **the primary goal is to create an archive of resources for learners of Chinese**. This is what makes this section of the site very different from Reddit and other similar communities that are more focused on the present and only offer limited search possibilities. Therefore, **it's very important that you tag all links properly and also write about why you are sharing them**, preferably by summarising what it is about and why it's good. People shouldn't have to go to the site in order to figure out if it's for them or not. **The first two questions below have to be answered properly for every link that it posted to the site**.
 

@@ -1,6 +1,6 @@
 <table id=tagtable>
 <tr>
-  <td width=200>What is your current level?</td>
+  <td width=200><strong>What is your current level?</strong></td>
   <td>
     <% Tag.tier(0).each do |tg| %>
       <%= link_to tg.tag, tag_url(tg), class: "#{tg.css_class} #{tg == @tags.try(:[],0) ? 'active' : ''}", data: { push: true } %>
@@ -9,7 +9,7 @@
 </tr>
 <% if @tags %>
   <tr>
-    <td> What do you want to improve? </td>
+    <td><strong> What do you want to improve?</strong> </td>
     <td>
       <% Tag.tier(1).sort_by{|i| %w[listening speaking reading writing vocabulary grammar culture how-to-learn productivity].index(i.tag.downcase) || -1}.each do |tg| %>
         <% if (count = tg.story_count_in(@tags.take(1))) and count > 0 %>
@@ -21,7 +21,7 @@
 
   <% if @tags.count >  1 %>
     <tr>
-      <td> Additional </td>
+      <td><strong> Additional</strong> </td>
       <td>
         <% Tag.tier(2).order(:tag).each do |tg| %>
           <% if (count = tg.story_count_in(@tags.take(2))) and count > 0 %>
