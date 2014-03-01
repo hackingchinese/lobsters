@@ -28,6 +28,7 @@ $ ->
           if t.val() == ''
             t.val(data.snippet)
           $('#story_url').val(data.url)
+          $('#story_remote_image_url').val(data.image)
         button.val(old_val)
         button.prop("disabled", false)
       .error ->

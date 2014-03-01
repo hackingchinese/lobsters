@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223141543) do
+ActiveRecord::Schema.define(version: 20140301230654) do
 
   create_table "comments", force: true do |t|
     t.datetime "created_at",                                                                    null: false
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20140223141543) do
     t.text     "markeddown_description", limit: 16777215
     t.text     "story_cache",            limit: 16777215
     t.integer  "comments_count",                                                    default: 0,   null: false
+    t.string   "image"
   end
 
   add_index "stories", ["hotness"], name: "hotness_idx", using: :btree

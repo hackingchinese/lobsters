@@ -16,6 +16,9 @@ class="story <%= story.vote == 1 ? "upvoted" : (story.vote == -1 ?
     <% end %>
   </div>
   <div class="details">
+    <% if story.image? %>
+      <%= image_tag story.image.url(:thumb), class: 'story-image' %>
+    <% end %>
     <span class="link">
       <% if story.can_be_seen_by_user?(@user) %>
         <a data-push href="<%= story.url_or_comments_url %>"><%= story.title %></a>

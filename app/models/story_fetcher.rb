@@ -8,6 +8,17 @@ class StoryFetcher
     valid_url || already_submitted || fetch_content  ||  parse_content
   end
 
+  def fetch_preview
+    valid_url || screenshot
+  end
+
+  def screenshot
+    file = Tempfile.new(['screenshot','.jpg'])
+    file.binmode
+    `wkhtmltoimage --width 1024 --height 1024 #{Shellwords.escape(url)} #{file.path}`
+    file
+  end
+
   private
   def valid_url
     if url.blank? or !url[/^https?:\/\//]
@@ -19,8 +30,8 @@ class StoryFetcher
   end
   def parse_content
     doc = Nokogiri::HTML.parse(@content.to_s)
-    text = doc.css(' meta[property="og:description"], meta[itemprop=description],meta[name=description]').map{|i|i['content']}.uniq.compact.max{|i| i.length }
-    image = doc.css(' meta[property="og:description"], meta[itemprop=description]').map{|i|i['content']}.uniq.compact.first
+    text = doc.css(' meta[property="og:description"], meta[itemprop=description],meta[name=description], meta[name="twitter:description"]'  ).map{|i|i['content']}.uniq.compact.max{|i| i.length }
+    image = doc.css(' meta[property="og:description"], meta[itemprop=description],meta[name="twitter:image:src"], meta[property="og:image"]').map{|i|i['content']}.uniq.compact.first
     {
       title: doc.at('title, h1').try(:text).try(:strip),
       image: image,

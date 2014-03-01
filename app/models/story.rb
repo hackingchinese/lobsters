@@ -25,7 +25,17 @@ class Story < ActiveRecord::Base
   before_validation :assign_short_id,
     :on => :create
   before_save :log_moderation
+  before_save :create_snapshot
   after_create :mark_submitter
+
+  mount_uploader :image, ImageUploader
+
+  def create_snapshot
+    return if remote_image.blank?
+    if image.blank? || url_changed?
+      self.image = StoryFetcher.new(url).screenshot
+    end
+  end
 
   validate do
     if self.url.present?
