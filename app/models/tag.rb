@@ -48,7 +48,7 @@ class Tag < ActiveRecord::Base
   end
 
   def story_count_in(other_tags)
-    tags = (other_tags + [ self]).uniq.compact
+    tags = other_tags.compact.reject{|t| t.tier == tier } <<  self
     Tagging.where(tag_id: tags).group(:story_id).having('count(story_id) = ?', tags.count).count.count
   end
 
