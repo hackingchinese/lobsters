@@ -193,30 +193,6 @@ var _Lobsters = Class.extend({
     return false;
   },
 
-  fetchURLTitle: function(button, url_field, title_field) {
-    if (url_field.val() == "")
-      return;
-
-    var old_value = button.val();
-    button.prop("disabled", true);
-    button.val("Fetching...");
-
-    $.post("/stories/fetch_url_title", {
-      fetch_url: url_field.val(),
-    })
-    .success(function(data) {
-      if (data && data.title)
-        title_field.val(data.title.substr(0,
-          title_field.maxLength));
-
-      button.val(old_value);
-      button.prop("disabled", false);
-    })
-    .error(function() {
-      button.val(old_value);
-      button.prop("disabled", false);
-    });
-  },
 
   bounceToLogin: function() {
     document.location = "/login?return=" +
@@ -295,37 +271,6 @@ $(document).ready(function() {
 
   $(document).on("click", "button.story-preview", function() {
     Lobsters.previewStory($(this).parents("form").first());
-  });
-
-  $(document).on("blur", "#story_url", function() {
-    /* if the url looks like a pdf, assign the pdf tag */
-    if ($("#story_url").val().match(/\.pdf$/i)) {
-      var ta = $("#story_tags_a").data("select2");
-      if (ta.getVal().indexOf("pdf") < 0)
-        ta.addSelectedChoice({ id: "pdf" });
-    }
-    /* if the url looks like a video site url, assign the video tag */
-    else if ($("#story_url").val().match(/[\/\.]((youtube|vimeo)\.com|youtu\.be)\//i)) {
-      var ta = $("#story_tags_a").data("select2");
-      if (ta.getVal().indexOf("video") < 0)
-        ta.addSelectedChoice({ id: "video" });
-    }
-    /* if the url looks like a slide sharing site url, assign the slides tag */
-    else if ($("#story_url").val().match(/[\/\.](slideshare\.net)\//i)) {
-      var ta = $("#story_tags_a").data("select2");
-      if (ta.getVal().indexOf("slides") < 0)
-        ta.addSelectedChoice({ id: "slides" });
-    }
-  });
-
-  $(document).on("blur", "#story_title", function() {
-    var m;
-    if (m = $("#story_title").val().match(/^(show|ask) lobste\.?rs:? (.+)$/i)) {
-      var ta = $("#story_tags_a").data("select2");
-      if (ta.getVal().indexOf(m[1].toLowerCase()) < 0)
-        ta.addSelectedChoice({ id: m[1].toLowerCase() });
-      $("#story_title").val(m[2]);
-    }
   });
 
   $(document).on("click", "#story_guidelines_toggler", function() {

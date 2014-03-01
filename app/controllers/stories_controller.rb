@@ -58,14 +58,7 @@ class StoriesController < ApplicationController
   end
 
   def fetch_url_title
-    s = Story.new
-    s.url = params[:fetch_url]
-
-    if (title = s.fetched_title(request.remote_ip)).present?
-      return render :json => { :title => title }
-    else
-      return render :json => "error"
-    end
+    render json: StoryFetcher.new(params[:fetch_url]).result
   end
 
   def new

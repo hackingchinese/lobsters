@@ -63,3 +63,5 @@ group :test, :development do
   gem "sqlite3"
 end
 
+gem 'carrierwave'
+

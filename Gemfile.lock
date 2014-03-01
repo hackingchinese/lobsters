@@ -49,6 +49,10 @@ GEM
       capistrano-bundler (>= 1.0.0)
     capistrano-rails-console (0.1.1)
       capistrano (>= 3.0.0)
+    carrierwave (0.9.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
     chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -197,6 +201,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.0)
   capistrano-rails-console
   capistrano-rvm!
+  carrierwave
   coffee-rails
   dotenv-rails
   dynamic_form
