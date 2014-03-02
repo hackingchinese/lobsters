@@ -30,6 +30,14 @@ class Story < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  def update_image
+    result = StoryFetcher.new(self.url).result(validate:false)
+    if result[:image]
+      self.remote_image_url = result[:image]
+      self.save validate: false
+    end
+  end
+
   def create_snapshot
     return if remote_image_url.present?
     if image.blank? || url_changed?

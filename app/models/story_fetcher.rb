@@ -4,8 +4,8 @@ class StoryFetcher
     @url = url.strip
   end
 
-  def result
-    valid_url || already_submitted || fetch_content  ||  parse_content
+  def result(validate: true)
+    (validate and valid_url) || already_submitted || fetch_content  ||  parse_content
   end
 
   def fetch_preview
@@ -37,7 +37,7 @@ class StoryFetcher
   def parse_content
     doc = Nokogiri::HTML.parse(@content.to_s)
     text = doc.css(' meta[property="og:description"], meta[itemprop=description],meta[name=description], meta[name="twitter:description"]'  ).map{|i|i['content']}.uniq.compact.max{|i| i.length }
-    image = doc.css(' meta[property="og:description"], meta[itemprop=description],meta[name="twitter:image:src"], meta[property="og:image"]').map{|i|i['content']}.uniq.compact.first
+    image = doc.css(' meta[property="og:image"],meta[name="twitter:image:src"],meta[name="image"]').map{|i|i['content']}.uniq.compact.first
     {
       title: doc.at('title, h1').try(:text).try(:strip),
       image: image,
