@@ -35,7 +35,6 @@ gem "unicorn"
 #### added by me
 gem "thin", group: :development
 gem 'dotenv-rails'
-gem 'pry'
 gem 'sass-rails'
 gem 'whenever'
 group :capistrano do
@@ -61,10 +60,12 @@ group :test, :development do
   gem "rspec-rails", "~> 2.6"
   gem "machinist"
   gem "sqlite3"
+  gem 'pry-rails'
 end
 
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'wkhtmltoimage-binary'
+gem 'headless'
 
 

@@ -31,7 +31,7 @@ class Story < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def create_snapshot
-    return if remote_image.blank?
+    return if remote_image_url.present?
     if image.blank? || url_changed?
       self.image = StoryFetcher.new(url).screenshot
     end
