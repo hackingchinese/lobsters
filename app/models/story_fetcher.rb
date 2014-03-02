@@ -16,7 +16,7 @@ class StoryFetcher
     file = Tempfile.new(['screenshot','.jpg'])
     file.binmode
     Headless.ly do
-      `wkhtmltoimage  --transparent --use-xserver --width 1024 --height 1024 #{Shellwords.escape(url)} #{file.path}`
+      `wkhtmltoimage  --transparent --use-xserver --width 1200 --height 900 #{Shellwords.escape(url)} #{file.path}`
     end
     if $?.to_i  == 0
       file
