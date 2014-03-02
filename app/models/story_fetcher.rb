@@ -24,6 +24,7 @@ class StoryFetcher
   end
 
   private
+
   def valid_url
     if url.blank? or !url[/^https?:\/\//]
       {
@@ -32,6 +33,7 @@ class StoryFetcher
       }
     end
   end
+
   def parse_content
     doc = Nokogiri::HTML.parse(@content.to_s)
     text = doc.css(' meta[property="og:description"], meta[itemprop=description],meta[name=description], meta[name="twitter:description"]'  ).map{|i|i['content']}.uniq.compact.max{|i| i.length }
@@ -43,6 +45,7 @@ class StoryFetcher
       url: filtered_url
     }
   end
+
   def fetch_content
     story = Story.new(url: url)
     @content = story.fetched_content
@@ -53,15 +56,17 @@ class StoryFetcher
       }
     end
   end
+
   def already_submitted
-    if story = Story.where(url: url).first
+    if story = Story.where(url: url).first and story != @story
       {
         status: 'error',
         message: "This story was already submitted. Please check out the link <a href='#{story.comments_url}'>here</a>."
       }
     end
-    def filtered_url
-      @url.gsub(/\??utm_source.*/,'')
-    end
+  end
+
+  def filtered_url
+    @url.gsub(/\??utm_source.*/,'')
   end
 end
