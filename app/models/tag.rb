@@ -10,6 +10,7 @@ class Tag < ActiveRecord::Base
     user && user.is_moderator?? all : where(:privileged => false)
   end
 
+  scope :ordered, -> { order :tag }
   scope :active, -> { where(:inactive => false) }
   scope :tier, ->(i) { where(tier: i)}
 

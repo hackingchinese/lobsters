@@ -1,7 +1,7 @@
 $ ->
   window.wiselinks = new Wiselinks($('#theloop > .copy-pad'), html4: false )
   $(document).on 'page:done', ->
-    $("#story_tags_a").select2
+    $(".js-select2").select2
       formatSelection: (what)-> what.id
       matcher: (term, text)->
         return text.toUpperCase().indexOf(term.toUpperCase()) == 0

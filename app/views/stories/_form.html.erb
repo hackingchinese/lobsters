@@ -45,12 +45,15 @@
   </div>
 
   <div class="boxline" style="margin-bottom: 2px;">
-  <%= f.label :tags_a, "Tags:", :class => "required",
-    :style => "line-height: 2.3em;" %>
-  <%= f.select "tags_a", options_for_select(
-    Tag.order('tier').map{|t|
-      [t.tag + " <em>#{I18n.t("tiers.#{t.tier}")}</em>", t.tag]}, f.object.tags_a
-    ), {}, { :multiple => true } %>
+    <% t('tiers').each do |tier,name| %>
+      <%= f.label :tags_a, "#{name}:", :class => "required",
+        :style => "line-height: 2.3em;" %>
+      <%= f.select "tags_a", options_for_select(
+        Tag.tier(tier).ordered.map{|t|
+          [t.tag, t.tag]}, f.object.tags_a
+      ), {}, { :multiple => true, id: 'tags_a_0', class: 'js-select2', style: 'width: 100%' } %>
+    <p class='help-text'><%= t("tier_help.#{tier}") %></p>
+  <% end %>
   </div>
 
   <div class="boxline">

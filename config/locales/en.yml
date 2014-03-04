@@ -7,6 +7,10 @@ en:
     "0": Proficiency
     "1": Skill
     "2": Medium/Extra
+  tier_help:
+    "0": Select at least one from this category. Select 'Beginner', 'Intermediate', and 'Advanced' if the content is generally interesting for all learner
+    "1": Select at least one item from this category
+    "2": Select any number of additional tags to further classify the content
 
   text:
     invite_guidelines: |

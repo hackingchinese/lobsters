@@ -5,7 +5,7 @@ class StoryFetcher
   end
 
   def result(validate: true)
-    (validate && valid_url || already_submitted)  || fetch_content  ||  parse_content
+    (validate && (valid_url || already_submitted))  || fetch_content  ||  parse_content
   end
 
   def fetch_preview
