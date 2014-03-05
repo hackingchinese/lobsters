@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   before_filter :find_user_from_rss_token, :only => [ :index, :newest ]
 
   def index
-    @stories = find_stories
+    @stories = find_stories recent: true
     @tags = []
 
     @rss_link ||= "<link rel=\"alternate\" type=\"application/rss+xml\" " <<
@@ -104,7 +104,7 @@ class HomeController < ApplicationController
     end
     @tag = @tags.last
 
-    @stories = find_stories(tags: @tags)
+    @stories = find_stories(tags: @tags, popular: true)
 
     @heading = @title = @tag.description.blank?? @tag.tag : @tag.description
     @cur_url = tag_url(@tag.tag)
@@ -148,8 +148,7 @@ private
   def find_stories(how = {})
     @page = how[:page] = 1
     if params[:page].to_i > 0
-      @page = how[:page] = params[:page].to_i
-    end
+      @page = how[:page] = params[:page].to_i end
 
     # guest views have caching, but don't bother for logged-in users or dev or
     # when the user has tag filters
@@ -237,7 +236,7 @@ private
               "stories.created_at DESC"
             elsif how[:recent]
               "hotness"
-            else
+            else # popular
               "(upvotes - downvotes) DESC"
             end
 
