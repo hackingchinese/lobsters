@@ -40,6 +40,7 @@ class HomeController < ApplicationController
     @heading = @title = "Newest Stories"
     @cur_url = "/newest"
     @newest = true
+    @tags = []
 
     @rss_link = "<link rel=\"alternate\" type=\"application/rss+xml\" " <<
       "title=\"RSS 2.0 - Newest Items\" href=\"/newest.rss" <<
@@ -232,6 +233,13 @@ private
         end
       end
     end
+    order = if how[:newest]
+              "stories.created_at DESC"
+            elsif how[:recent]
+              "hotness"
+            else
+              "(upvotes - downvotes) DESC"
+            end
 
     stories = stories.includes(
       :user, :taggings => :tag
@@ -239,8 +247,7 @@ private
       STORIES_PER_PAGE + 1
     ).offset(
       (how[:page] - 1) * STORIES_PER_PAGE
-    ).order(
-      (how[:newest] || how[:recent]) ? "stories.created_at DESC" : "hotness"
+    ).order(order
     ).to_a
 
     show_more = false
