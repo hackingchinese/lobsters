@@ -203,10 +203,11 @@ class Story < ActiveRecord::Base
 
     begin
       s = Sponge.new
-      s.timeout = 3
-      @fetched_content = s.fetch(self.url, :get, nil, nil,
-        { "User-agent" => "#{Rails.application.domain} for #{for_remote_ip}" },
-        3)
+      s.timeout = 5
+      headers = { "User-agent" => "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/Firefox27.0",
+          "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          'Accept-Language' => 'Accept-Languagede-de,de;q=0.8,en-us;q=0.5,en;q=0.36'}
+      @fetched_content = s.fetch(self.url, :get, nil, nil, headers , 3)
     rescue
     end
 
