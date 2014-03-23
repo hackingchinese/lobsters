@@ -77,9 +77,6 @@ GEM
     hike (1.2.3)
     htmlentities (4.3.1)
     i18n (0.6.9)
-    innertube (1.1.0)
-    joiner (0.2.0)
-      activerecord (>= 3.1.0, < 4.1.0)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -90,20 +87,23 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.2)
-    middleware (0.1.0)
     mime-types (1.25.1)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.4)
-    mysql2 (0.3.14)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
+    pg (0.17.1)
+    pg_search (0.7.2)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     polyglot (0.3.3)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -130,7 +130,6 @@ GEM
     raindrops (0.12.0)
     rake (10.1.1)
     rdiscount (2.1.7)
-    riddle (1.5.10)
     rspec-core (2.14.7)
     rspec-expectations (2.14.4)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -169,13 +168,6 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
-    thinking-sphinx (3.1.0)
-      activerecord (>= 3.1.0)
-      builder (>= 2.1.2)
-      innertube (>= 1.0.2)
-      joiner (>= 0.2.0)
-      middleware (>= 0.1.0)
-      riddle (>= 1.5.10)
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
@@ -219,9 +211,10 @@ DEPENDENCIES
   machinist
   mail
   mini_magick
-  mysql2 (>= 0.3.14)
   nokogiri
   oauth
+  pg
+  pg_search
   pry-rails
   rails (= 4.0.2)
   rdiscount
@@ -229,7 +222,6 @@ DEPENDENCIES
   sass-rails
   sqlite3
   thin
-  thinking-sphinx (~> 3.1.0)
   uglifier (>= 1.3.0)
   unicorn
   whenever

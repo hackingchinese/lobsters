@@ -1,4 +1,7 @@
 class Story < ActiveRecord::Base
+  include PgSearch
+  multisearchable :against => [:title, :description]
+
   belongs_to :user
   has_many :taggings,
     :autosave => true

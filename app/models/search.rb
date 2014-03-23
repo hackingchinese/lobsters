@@ -26,7 +26,7 @@ class Search
   end
 
   def to_url_params
-    [ :q, :what, :order ].map{|p| "#{p}=#{CGI.escape(self.send(p).to_s)}"
+    [ :q ].map{|p| "#{p}=#{CGI.escape(self.send(p).to_s)}"
       }.join("&amp;")
   end
 
@@ -35,20 +35,7 @@ class Search
   end
 
   def search_for_user!(user)
-    opts = {
-      :ranker   => :bm25,
-      :page     => @page,
-      :per_page => @per_page,
-      :include  => [ :story, :user ],
-    }
-
-    if order == "newest"
-      opts[:order] = "created_at DESC"
-    elsif order == "points"
-      opts[:order] = "score DESC"
-    end
-
-    opts[:classes] = case what
+    classes = case what
       when "all"
         [ Story, Comment ]
       when "comments"
@@ -65,16 +52,12 @@ class Search
     # go go gadget search
     @results = []
     @total_results = 0
-    begin
-      @results = ThinkingSphinx.search query, opts
-      @total_results = @results.total_entries
-    rescue => e
-      Rails.logger.info "Error from Sphinx: #{e.inspect}"
-    end
+    @results = PgSearch.multisearch(query).where(:searchable_type => classes).map{|i|i.searchable}
+    @total_results = @results.count
 
     # bind votes for both types
 
-    if opts[:classes].include?(Comment) && user
+    if classes.include?(Comment) && user
       votes = Vote.comment_votes_by_user_for_comment_ids_hash(user.id,
         @results.select{|r| r.class == Comment }.map{|c| c.id })
 
@@ -85,7 +68,7 @@ class Search
       end
     end
 
-    if opts[:classes].include?(Story) && user
+    if classes.include?(Story) && user
       votes = Vote.story_votes_by_user_for_story_ids_hash(user.id,
         @results.select{|r| r.class == Story }.map{|s| s.id })
 
