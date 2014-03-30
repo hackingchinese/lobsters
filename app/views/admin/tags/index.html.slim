@@ -1,0 +1,21 @@
+table[style='width: 100%']
+  thead
+    tr
+      th name
+      th tier
+      th stories
+  tbody
+    - @tags.each do |tag|
+      tr
+        td
+          = link_to [:edit, :admin, tag] do
+            =tag.tag
+        td
+          =tag.tier
+          span<
+            = t "tiers.#{tag.tier}"
+        td=tag.stories.count
+    tr
+
+h2 new tag
+= render 'form'

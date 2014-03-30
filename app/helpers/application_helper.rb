@@ -26,6 +26,8 @@ module ApplicationHelper
         tag_url tier_0: [ @tags[0] || 'All' , tag]
       when 2
         tag_url tier_0: [ @tags[0] || 'All', @tags[1] || 'All' , tag]
+      when 3
+        tag_url tier_0: [ @tags[0] || 'All', @tags[1] || 'All' , @tags[2] || 'All', tag]
       end
     else
       tag_url(tag)

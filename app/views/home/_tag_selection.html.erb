@@ -20,11 +20,21 @@
 
   <% if tag_tier > 0 %>
     <tr>
-      <td class='question'><strong> Additional</strong> </td>
+      <td class='question'><strong> Type</strong> </td>
       <td>
         <% Tag.tier(2).order(:tag).each do |tg| %>
           <% if (count = tg.story_count_in(@tags)) and count > 0 %>
             <%= link_to tag_url_with_category(tg), class: "#{tg.css_class} #{tg == @tags[2] ? 'active' : ''}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td class='question'><strong> Additional</strong> </td>
+      <td>
+        <% Tag.tier(3).order(:tag).each do |tg| %>
+          <% if (count = tg.story_count_in(@tags)) and count > 0 %>
+            <%= link_to tag_url_with_category(tg), class: "#{tg.css_class} #{tg == @tags[3] ? 'active' : ''}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
           <% end %>
         <% end %>
       </td>

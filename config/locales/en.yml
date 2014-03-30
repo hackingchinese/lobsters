@@ -4,13 +4,16 @@
 en:
   site_title: Resources
   tiers:
-    "0": Proficiency
-    "1": Skill
-    "2": Medium/Extra
+    "0": Level
+    "1": Topic
+    "2": Type
+    "3": Extra
+
   tier_help:
     "0": Select at least one from this category. Select 'Beginner', 'Intermediate', and 'Advanced' if the content is generally interesting for all learner
     "1": Select at least one item from this category
-    "2": Select any number of additional tags to further classify the content
+    "2": Type
+    "3": Select any number of additional tags to further classify the content
 
   text:
     invite_guidelines: |

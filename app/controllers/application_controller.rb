@@ -59,6 +59,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin
+    if !@user or !@user.is_admin?
+      redirect_to '/', notice: 'you are not allowed to view this page'
+    end
+  end
+
   def require_logged_in_user_or_400
     if @user
       true

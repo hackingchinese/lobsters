@@ -1,4 +1,8 @@
 Lobsters::Application.routes.draw do
+  namespace :admin do
+    resources :tags
+  end
+
   scope :format => "html" do
     root :to => "home#index"
 
@@ -31,6 +35,10 @@ Lobsters::Application.routes.draw do
       :as => "reset_password"
     match "/login/set_new_password" => "login#set_new_password",
       :as => "set_new_password", :via => [:get, :post]
+
+    get "/t/:tier_0/:tier_1/:tier_2/:tier_3" => "home#tagged", :format => /html|rss/
+    get "/t/:tier_0/:tier_1/:tier_2/:tier_3/page/:page" => "home#tagged"
+
 
     get "/t/:tier_0/:tier_1/:tier_2" => "home#tagged", :format => /html|rss/
     get "/t/:tier_0/:tier_1/:tier_2/page/:page" => "home#tagged"

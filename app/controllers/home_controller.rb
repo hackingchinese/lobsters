@@ -87,20 +87,15 @@ class HomeController < ApplicationController
     # @tag = Tag.where(:tag => params[:tag]).first!
     @tags = []
 
-    if params[:tier_0] == 'All'
-      @tags << nil
-    else
-      @tags << Tag.where(tag: params[:tier_0]).first!
-    end
-    if params[:tier_1]
-      if params[:tier_1] == 'All'
-        @tags << nil
-      else
-        @tags << Tag.tier(1).where(tag: params[:tier_1]).first!
+    [ 0, 1, 2, 3].each do |t|
+      s = :"tier_#{t}"
+      if params[s]
+        if params[s] == 'All'
+          @tags << nil
+        else
+          @tags << Tag.where(tag: params[s]).first!
+        end
       end
-    end
-    if params[:tier_2]
-      @tags << Tag.tier(2).where(tag: params[:tier_2]).first!
     end
     @tag = @tags.last
 

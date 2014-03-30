@@ -1,0 +1,10 @@
+= form_for [:admin, @tag] do |f|
+  p
+    = label_tag 'tag[tag]' do
+      span> Name:
+      = f.text_field :tag
+  p
+    = label_tag 'tag[tier]' do
+      span> Tier:
+      = f.text_field :tier
+  = f.submit

@@ -1,14 +1,12 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "4.0.2"
+gem "rails", "4.0.4"
+gem 'slim-rails'
 
-# Use PostgreSQL as the database for Active Record
 gem "pg"
-# Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 
-# Use jquery as the JavaScript library
 gem "jquery-rails"
 
 gem 'wiselinks'
