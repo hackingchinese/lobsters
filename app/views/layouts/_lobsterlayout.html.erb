@@ -25,8 +25,12 @@
       <span class="headerlinks">
         <% links.each do |u,v| %>
           <a data-push href="<%= u %>" <%= u == @cur_url ? raw("class=\"cur_url\"") :
-            "" %>><%= v %></a>
-        <% end %>
+            "" %>>
+            <% if v == 'Submit resource' %>
+              <strong><%= v %></strong>
+            <% else %><%= v %></a>
+          <% end %>
+          <% end %>
       </span>
     </div>
 
