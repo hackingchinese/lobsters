@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  STORIES_PER_PAGE = 50
+  STORIES_PER_PAGE = 25
 
   # how many points a story has to have to probably get on the front page
   HOT_STORY_POINTS = 5

@@ -25,7 +25,7 @@ header
 
 main: .container
   - if @cur_url.present? && !navigation_links.keys.include?(@cur_url) && @heading.present?
-    span id="headertitle"
+    h2 id="headertitle"
       a[data-push href="#{@cur_url}"] =  @heading
 
   - if flash[:error]
@@ -35,3 +35,15 @@ main: .container
     .alert.alert-success
       = flash[:success]
   = yield
+footer: .container
+  ul.nav.navbar-nav.pull-right
+    li: a[href="/moderations" data-push] Moderation Log
+    - if @user && !@user.is_new? && (iqc = InvitationRequest.verified_count) > 0
+      li
+        a[href="/invitations" data-push] Invitation Queue (#{iqc})
+    - if @user.try(:is_admin?)
+      li
+        a[href='/admin/tags' data-push] Tags
+    li: a href="/privacy" Privacy
+    li: a href="/about" About
+
