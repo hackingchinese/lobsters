@@ -62,11 +62,11 @@ require "#{Rails.root}/lib/monkey"
 
 class << Rails.application
   def domain
-    "links.hackingchinese.com"
+    "resources.hackingchinese.com"
   end
 
   def name
-    "Hacking Chinese Links"
+    "Hacking Chinese Resources"
   end
 end
 
