@@ -9,7 +9,7 @@ gem "pg"
 gem "uglifier", ">= 1.3.0"
 
 gem "dynamic_form"
-gem "exception_notification", "2.6.1"
+gem "exception_notification"
 gem "bcrypt-ruby", "~> 3.1.2"
 
 gem "thin", group: :development
