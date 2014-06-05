@@ -1,3 +1,14 @@
+@import bootswatch-scss/readable/variables
+$icon-font-path: 'bootstrap/'
+$link-color: rgb(123,0,0)
+$brand-primary: $link-color
+$btn-primary-bg: $link-color
+$label-primary-bg: $link-color
+.label-default a
+  color: lighten($link-color, 20%)
+@import bootstrap
+@import bootswatch-scss/readable/bootswatch
+
 body
   font-family: Georgia,"Times New Roman",Times,serif
   font-style: normal
@@ -66,3 +77,32 @@ div#story_box div.markdown_help_toggler
   padding-top: 0
   margin-top: 0
   line-height: 1.2
+
+body
+  font-family: Georgia,"Times New Roman",Times,serif
+nav
+  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode",sans-serif
+h1,h2,h3,h4,h5,h6
+  font-family: Georgia,"Times New Roman",Times,serif
+  font-weight: normal
+.top-nav
+  margin-bottom: 0
+  border-bottom: 0
+  border-radius: 0
+  .active > a
+    background: #ccc !important
+
+.bottom-nav
+  background: #ccc
+  border-top: 0
+  border-radius: 0
+.banner
+  background-image: image-url('banner.png')
+  max-width: 100%
+  height: image-height('banner.png')
+  background-repeat: no-repeat
+  background-color: white
+  margin: 40px 0
+.table > thead > tr > td.active, .table > thead > tr > th.active, .table > thead > tr.active > td, .table > thead > tr.active > th, .table > tbody > tr > td.active, .table > tbody > tr > th.active, .table > tbody > tr.active > td, .table > tbody > tr.active > th, .table > tfoot > tr > td.active, .table > tfoot > tr > th.active, .table > tfoot > tr.active > td, .table > tfoot > tr.active > th
+  background-color: $btn-primary-bg
+  color: $btn-primary-color

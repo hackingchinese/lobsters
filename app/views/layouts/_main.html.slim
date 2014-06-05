@@ -1,0 +1,37 @@
+header
+  .container
+    .banner
+  nav.navbar.navbar-default.top-nav
+    .container
+      ul.nav.navbar-nav
+        li: a href='//www.hackingchinese.com' Welcome!
+        li: a href='//www.hackingchinese.com/blog' Recent Articles
+        li: a href='//www.hackingchinese.com/archive-2' Archive
+        li: a href='//challenges.hackingchinese.com' Challenges
+        li.active: a href='/' Resources
+  nav.navbar.navbar-default.bottom-nav
+    .container
+      .navbar-header
+        button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          - navigation_links.each do |link,text|
+            li
+              a[href='#{link}' class='#{ link == @cur_url && 'active' }' data-push] = text
+
+main: .container
+  - if @cur_url.present? && !navigation_links.keys.include?(@cur_url) && @heading.present?
+    span id="headertitle"
+      a[data-push href="#{@cur_url}"] =  @heading
+
+  - if flash[:error]
+    .alert.alert-danger
+      = flash[:error]
+  - elsif flash[:success]
+    .alert.alert-success
+      = flash[:success]
+  = yield

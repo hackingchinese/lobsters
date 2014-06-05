@@ -39,4 +39,31 @@ module ApplicationHelper
     markdown = RDiscount.new(text)
     markdown.to_html.html_safe
   end
+
+  def navigation_links
+
+    links = {
+      "/newest" => "Newest",
+      "/comments" => "Comments"
+    }
+    if @user
+      links.merge!({ "/threads" => "Your Threads",
+                     "/stories/new" => "Submit resource" })
+    end
+
+    links.merge!({ "/search" => "Search" })
+    if @user
+      links.merge!( "/filters" => "Filters")
+
+      count = @user.unread_message_count
+      if count > 0
+        links.merge!( "/messages" => "#{count} Message(s)" )
+      else
+        links.merge!( '/settings' => "#{@user.username} (#{@user.karma})" )
+      end
+    else
+      links.merge!( '/login' => 'Login' )
+    end
+    links
+  end
 end

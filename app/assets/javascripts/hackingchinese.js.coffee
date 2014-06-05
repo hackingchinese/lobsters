@@ -1,11 +1,12 @@
 $ ->
-  window.wiselinks = new Wiselinks($('#theloop > .copy-pad'), html4: false )
+  window.wiselinks = new Wiselinks($('body'), html4: false )
   $(document).on 'page:done', ->
-    $(".js-select2").select2
-      formatSelection: (what)-> what.id
+    $(".js-select2").select2 formatSelection: (what)-> what.id
       matcher: (term, text)->
         return text.toUpperCase().indexOf(term.toUpperCase()) == 0
     $("#story_url").focus()
+
+    $('.help-tag').tooltip()
   .trigger('page:done')
 
   $('body').on 'click', "#story_fetch_title", ->
