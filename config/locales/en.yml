@@ -10,10 +10,10 @@ en:
     "3": Extra
 
   tier_help:
-    "0": Select at least one from this category. Select 'Beginner', 'Intermediate', and 'Advanced' if the content is generally interesting for all learner
-    "1": Select at least one item from this category
-    "2": Type
-    "3": Select any number of additional tags to further classify the content
+    "0": Select for what proficiency level(s) this link is suitable.
+    "1": Select which topic(s) are relevant, if more than three select 'general'.
+    "2": Select what kind of resource this is (usually only one).
+    "3": Select any number of additional tags to further classify the content.
 
   text:
     invite_guidelines: |
