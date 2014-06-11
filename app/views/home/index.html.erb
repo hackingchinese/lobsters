@@ -1,4 +1,6 @@
+<% if @tags %>
 <%= render 'tag_selection' %>
+<% end %>
 <ol class="stories list">
   <%= render :partial => "stories/listdetail", :collection => @stories,
     :as => :story %>
