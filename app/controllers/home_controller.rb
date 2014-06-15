@@ -234,6 +234,7 @@ private
             else # popular
               "(upvotes - downvotes) DESC"
             end
+    @total_count = stories.count
 
     stories = stories.includes(
       :user, :taggings => :tag
