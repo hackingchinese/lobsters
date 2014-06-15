@@ -31,7 +31,7 @@ class="story <%= story.vote == 1 ? "upvoted" : (story.vote == -1 ?
     <% if story.can_be_seen_by_user?(@user) %>
       <span class="tags">
         <abbr class='tag help-tag' title='<%= story.description %>'>?</abbr>
-        <% story.taggings.sort_by{|t| t.tag.tag }.sort_by{|t|
+        <% story.taggings.sort_by{|t| [t.tag.tier, t.tag.tag] }.sort_by{|t|
         t.tag.tag == "pdf" ? -1 : 0 }.each do |tagging| %>
           <a href="<%= tag_url_with_category(tagging.tag) %>"
             data-push
