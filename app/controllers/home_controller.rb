@@ -197,6 +197,7 @@ private
         )
       )
     end
+    @total_count = stories.count
 
     if how[:recent] && how[:page] == 1
       # try to help recently-submitted stories that didn't gain traction
@@ -234,7 +235,6 @@ private
             else # popular
               "(upvotes - downvotes) DESC"
             end
-    @total_count = stories.count
 
     stories = stories.includes(
       :user, :taggings => :tag
