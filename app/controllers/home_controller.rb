@@ -236,14 +236,17 @@ private
               "(upvotes - downvotes) DESC"
             end
 
+    if !(request.format.rss? and params[:full])
+      stories = stories.limit(
+        STORIES_PER_PAGE + 1
+      ).offset(
+        (how[:page] - 1) * STORIES_PER_PAGE
+      )
+    end
+
     stories = stories.includes(
       :user, :taggings => :tag
-    ).limit(
-      STORIES_PER_PAGE + 1
-    ).offset(
-      (how[:page] - 1) * STORIES_PER_PAGE
-    ).order(order
-    ).to_a
+    ).order(order).to_a
 
     show_more = false
     if stories.count > STORIES_PER_PAGE
