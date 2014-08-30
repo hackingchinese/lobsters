@@ -35,7 +35,7 @@ class HomeController < ApplicationController
   end
 
   def newest
-    @stories = find_stories({ :newest => true })
+    @stories = find_stories({ :newest => true, full: (request.format.rss? && params[:full]) })
 
     @heading = @title = "Newest Stories"
     @cur_url = "/newest"
@@ -62,7 +62,7 @@ class HomeController < ApplicationController
   def newest_by_user
     by_user = User.where(:username => params[:user]).first!
 
-    @stories = find_stories({ :by_user => by_user })
+    @stories = find_stories({ :by_user => by_user, full: (request.format.rss? && params[:full]) })
 
     @heading = @title = "Newest Stories by #{by_user.username}"
     @cur_url = "/newest/#{by_user.username}"
@@ -74,7 +74,7 @@ class HomeController < ApplicationController
   end
 
   def recent
-    @stories = find_stories({ :recent => true })
+    @stories = find_stories({ :recent => true, full: (request.format.rss? && params[:full]) })
 
     @heading = @title = "Recent Stories"
     @cur_url = "/recent"
@@ -99,7 +99,7 @@ class HomeController < ApplicationController
     end
     @tag = @tags.last
 
-    @stories = find_stories(tags: @tags, popular: true)
+    @stories = find_stories(tags: @tags, popular: true, full: (request.format.rss? && params[:full]))
 
     @heading = @title = @tag.description.blank?? @tag.tag : @tag.description
     @cur_url = tag_url(@tag.tag)
@@ -236,7 +236,7 @@ private
               "(upvotes - downvotes) DESC"
             end
 
-    if !(request.format.rss? and params[:full])
+    if !(how[:full])
       stories = stories.limit(
         STORIES_PER_PAGE + 1
       ).offset(
