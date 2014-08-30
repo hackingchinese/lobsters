@@ -151,7 +151,14 @@ var _Lobsters = Class.extend({
   },
 
   previewStory: function(form) {
-    $("#inside").load("/stories/preview", $(form).serializeArray());
+    $("#inside").load("/stories/preview", $(form).serializeArray(), function() {
+      $(".js-select2").select2({
+        formatSelection: function(what){ return what.id},
+        matcher: function(term, text){
+          return text.toUpperCase().indexOf(term.toUpperCase()) == 0
+        }
+      })
+    })
   },
 
   moderateStory: function(link) {

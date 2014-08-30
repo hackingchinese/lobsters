@@ -52,7 +52,8 @@ main: .container
   - elsif flash[:success]
     .alert.alert-success
       = flash[:success]
-  = yield
+  #inside
+    = yield
 footer: .container
   ul.nav.navbar-nav.pull-right
     li: a[href="/moderations" data-push] Moderation Log
