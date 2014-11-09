@@ -8,7 +8,11 @@
   <td class='question'><strong>Level</strong></td>
   <td>
     <% Tag.tier(0).each do |tg| %>
-      <%= link_to tg.tag, tag_url(tg), class: "#{tg.css_class} #{tg == @tags.try(:[],0) ? 'active' : ''}", data: { push: true } %>
+      <% if tg == @tags.try(:[],0) %>
+        <%= link_to tg.tag, '/', class: "#{tg.css_class} active", data: { push: true } %>
+      <% else %>
+        <%= link_to tg.tag, tag_url(tg), class: "#{tg.css_class}", data: { push: true } %>
+      <% end %>
     <% end %>
   </td>
 </tr>
@@ -16,8 +20,13 @@
     <td class='question'><strong>Topic</strong> </td>
     <td>
       <% Tag.tier(1).sort_by{|i| %w[speaking reading writing vocabulary grammar chinese-in-context living-in-chinese language-learning general].index(i.tag.downcase) || -1}.each do |tg| %>
-        <% if (count = tg.story_count_in((@tags || []).compact.take(1))) and count > 0 %>
-          <%= link_to tag_url_with_category(tg), class: "#{tg.css_class} #{tg == @tags[1] ? 'active' : ''}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+        <% parent_tags = (@tags || []).compact.take(1) %>
+        <% if (count = tg.story_count_in(parent_tags)) and count > 0 %>
+          <% if tg == @tags[1] %>
+            <%= link_to tag_url(parent_tags.first), class: "#{tg.css_class} active", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+          <% else %>
+            <%= link_to tag_url_with_category(tg), class: "#{tg.css_class}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+          <% end %>
         <% end %>
       <% end %>
     </td>
@@ -27,8 +36,13 @@
       <td class='question'><strong> Type</strong> </td>
       <td>
         <% Tag.tier(2).sort_by{|i| %w[information-and-advice resource-highlights resource-collections tools-and-apps social-learning].index(i.tag.downcase) || -1}.each do |tg| %>
-          <% if (count = tg.story_count_in(@tags)) and count > 0 %>
-            <%= link_to tag_url_with_category(tg), class: "#{tg.css_class} #{tg == @tags[2] ? 'active' : ''}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+          <% parent_tags = (@tags || []) %>
+          <% if (count = tg.story_count_in(parent_tags)) and count > 0 %>
+            <% if tg == @tags[2] %>
+              <%= link_to tag_url(parent_tags.take(2)), class: "#{tg.css_class} active", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+            <% else %>
+              <%= link_to tag_url_with_category(tg), class: "#{tg.css_class}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+            <% end %>
           <% end %>
         <% end %>
       </td>
@@ -38,8 +52,13 @@
       <td class='question'><strong> Additional</strong> </td>
       <td>
         <% Tag.tier(3).order(:tag).each do |tg| %>
-          <% if (count = tg.story_count_in(@tags)) and count > 0 %>
-            <%= link_to tag_url_with_category(tg), class: "#{tg.css_class} #{tg == @tags[3] ? 'active' : ''}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+          <% parent_tags = (@tags || []) %>
+          <% if (count = tg.story_count_in(parent_tags)) and count > 0 %>
+            <% if tg == @tags[3] %>
+              <%= link_to tag_url(parent_tags.take(3)), class: "#{tg.css_class} active", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+            <% else %>
+              <%= link_to tag_url_with_category(tg), class: "#{tg.css_class}", data: { push: true }  do %><%= tg.tag %>&nbsp;(<%= count %>)<% end %>
+            <% end %>
           <% end %>
         <% end %>
       </td>
