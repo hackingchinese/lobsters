@@ -1,6 +1,6 @@
 class Story < ActiveRecord::Base
   include PgSearch
-  multisearchable :against => [:title, :description]
+  multisearchable :against => [:title, :description, :tag_list]
 
   belongs_to :user
   has_many :taggings,
@@ -417,6 +417,10 @@ class Story < ActiveRecord::Base
 
   def url_or_comments_url
     self.url.blank? ? self.comments_url : self.url
+  end
+
+  def tag_list
+    tags.pluck(:tag).join(', ')
   end
 
   def vote_summary_for(user)
