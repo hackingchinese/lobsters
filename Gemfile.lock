@@ -6,14 +6,6 @@ GIT
       capistrano (~> 3.0)
       sshkit (~> 1.2)
 
-GIT
-  remote: git://github.com/twbs/bootstrap-sass.git
-  revision: d64d48fd23c9624cc5c996e6516b7dc33fde5919
-  specs:
-    bootstrap-sass (3.3.5)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -43,12 +35,15 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
-    autoprefixer-rails (5.2.0.1)
+    autoprefixer-rails (5.2.1.1)
       execjs
       json
     bcrypt (3.1.10)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    bootstrap-sass (3.3.5)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     builder (3.1.4)
     capistrano (3.0.1)
       i18n
@@ -221,7 +216,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
-  bootstrap-sass!
+  bootstrap-sass
   capistrano (~> 3.0.1)
   capistrano-bundler
   capistrano-rails (~> 1.1.0)

@@ -14,7 +14,7 @@ gem "bcrypt-ruby", "~> 3.1.2"
 
 gem "thin", group: :development
 
-gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
+gem 'bootstrap-sass'
 gem 'rails-assets-bootswatch-scss'
 gem 'compass-rails'
 gem 'sass-rails', '~>4.0.2'
