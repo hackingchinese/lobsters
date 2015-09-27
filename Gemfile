@@ -17,7 +17,7 @@ gem "thin", group: :development
 gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'
 gem 'rails-assets-bootswatch-scss'
 gem 'compass-rails'
-gem 'sass-rails', '4.0.2'
+gem 'sass-rails', '~>4.0.2'
 gem 'sprockets', '~>2.11.0'
 gem 'coffee-rails'
 gem "jquery-rails"
