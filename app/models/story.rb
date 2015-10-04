@@ -1,3 +1,4 @@
+require 'markdowner'
 class Story < ActiveRecord::Base
   include PgSearch
   multisearchable :against => [:title, :description, :tag_list]
